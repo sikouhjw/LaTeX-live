@@ -1,4 +1,10 @@
-\documentclass[fontset=fandol]{ctexart}
+\documentclass[fontset=none]{ctexart}
+\setCJKmainfont{Source Han Serif SC}[
+  UprightFont    = *-Regular,
+  BoldFont       = *-Bold,
+  ItalicFont     = GBZenKai-Medium,
+  BoldItalicFont = *-Bold,
+]
 \usepackage{sourceserifpro,sourcesanspro,sourcecodepro}
 \usepackage{amsthm}
 \newtheorem{lem}{Lemma}
@@ -9,6 +15,6 @@
 \pagestyle{empty}
 \begin{document}
   \begin{lem} 测试 test \end{lem}
-  \begin{defn} 测 试 test \end{defn}
+  \begin{defn} 测试 test \end{defn}
   \begin{rem} 测试 test \end{rem}
 \end{document}
