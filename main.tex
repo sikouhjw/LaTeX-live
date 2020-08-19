@@ -48,7 +48,7 @@
       \url{https://www.latexstudio.net/}
     \end{tabular}
 
-    \includegraphics[width=5cm]{material/latex工作室.jpg}
+    \includegraphics[width=4.9cm]{material/latex工作室.jpg}
   \end{frame}
   \begin{frame}[standout]{我的博客}
     \url{https://sikouhjw.gitee.io/}
@@ -57,10 +57,14 @@
     \tableofcontents
   \end{frame}
   \section{\texorpdfstring{\pkg{amsthm}}{amsthm} 宏包的使用}
-  \begin{frame}{\pkg{amsthm} 宏包中译本}
-    GitHub 托管地址：\url{https://github.com/sikouhjw/amsthm-zh}，基本都是机翻。
+  \begin{frame}{\pkg{amsthm} 宏包手册中译本}
+    \pkg{amsthm} 宏包手册中译本（基本都是机翻，建议结合原英文文档阅读）的 GitHub 托管地址：
     \begin{center}
-      \href{material/amsthdoc-zh-v1.0.pdf}{点我打开文档}
+      \url{https://github.com/sikouhjw/amsthm-zh}
+    \end{center}
+    本节内容都是基于 \pkg{amsthm} 宏包手册中译本，更多、更详细的内容请去阅读宏包手册。
+    \begin{center}
+      \href{material/amsthdoc-zh-v1.0.pdf}{点我打开中译本}
     \end{center}
   \end{frame}
   \subsection{\texorpdfstring{\pkg{amsthm}}{amsthm} 基础}
@@ -274,7 +278,7 @@
     \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item \mintinline{latex}{spacing} 环境是用来调整行间距的，这么做太麻烦了，不如使用 \mintinline{latex}{\linespread} 一劳永逸；
-        \item 手写所有章节、图表编号，我也不知道该怎么说，可能跟习惯使用 word 有关。
+        \item 手写所有章节、图表编号，是非常不 \LaTeX{}、非常蠢的一种行为。
       \end{itemize}
     \end{minipage}
   \end{frame}
@@ -332,9 +336,7 @@
     \end{enumerate}
     等价于 \LaTeX{} 中的
     \begin{minted}{latex}
-\begin{center}
-  \zihao{3}\heiti 一、问题的提出
-\end{center}
+\begin{center} \zihao{3}\heiti 一、问题的提出 \end{center}
     \end{minted}
     \pause
     结合之前所学，我们知道，这么做是十分不推荐的，因为
