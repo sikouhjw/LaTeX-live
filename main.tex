@@ -1,7 +1,7 @@
 \documentclass[aspectratio=169,fontset=none]{ctexbeamer}
 \usetheme{metropolis}
 \usepackage{sourceserifpro,sourcesanspro,sourcecodepro}
-\defaultCJKfontfeatures{Mapping=fullwidth-stop}
+\defaultCJKfontfeatures{Mapping=fullwidth-stop, Scale=0.962216}
 \IfFontExistsTF{Source Han Serif SC}{
   \setCJKmainfont{Source Han Serif SC}[
     UprightFont     = *-Regular,
@@ -30,26 +30,31 @@
 }
 
 \usepackage{minted}
-\setminted{formatcom=\xeCJKVerbAddon}
+\setminted{formatcom=\xeCJKVerbAddon, fontsize=\small}
+\setmintedinline{formatcom=\xeCJKVerbAddon, fontsize=auto}
 \renewcommand{\emph}[1]{{\color{red}\bfseries #1}}
 \newcommand{\pkg}[1]{\texttt{#1}}
 \newcommand{\cls}[1]{\texttt{#1}}
-\title{\pkg{amsthm} 宏包的使用 \& \LaTeX{} 代码的规范性 \& 内容与样式分离}
+\title{\pkg{amsthm} （定理类）宏包与 \LaTeX{} 代码的规范性}
 \author{死抠 \texttt{https://github.com/sikouhjw}}
 \begin{document}
   \maketitle
-  \begin{frame}{目录}
-    \tableofcontents
+  \begin{frame}[standout]{前方高能}
+    本次直播内容稍微有点进阶，萌新如果看不懂可以先入门再看录屏 / slides。
   \end{frame}
   \begin{frame}[standout]{学习和问题都到这里}
-    \begin{tabular}{cl}
-      Questions? & \url{https://www.latexstudio.net/}
+    \begin{tabular}{c}
+      {\Huge Questions?} \\
+      \url{https://www.latexstudio.net/}
     \end{tabular}
 
     \includegraphics[width=5cm]{material/latex工作室.jpg}
   \end{frame}
   \begin{frame}[standout]{我的博客}
     \url{https://sikouhjw.gitee.io/}
+  \end{frame}
+  \begin{frame}{目录}
+    \tableofcontents
   \end{frame}
   \section{\texorpdfstring{\pkg{amsthm}}{amsthm} 宏包的使用}
   \begin{frame}{\pkg{amsthm} 宏包中译本}
@@ -123,7 +128,7 @@
     \end{minipage}
     \vskip 5pt
     \begin{minipage}[t]{0.6\textwidth}
-    输入
+    输入：
     \begin{minted}{latex}
 \begin{lem} 测试 test \end{lem}
 \begin{defn} 测试 test \end{defn}
@@ -131,7 +136,7 @@
     \end{minted}
     \end{minipage}%
     \begin{minipage}[t]{0.4\textwidth}
-    输出
+    输出：
       \begin{figure}
         \centering
         \includegraphics{material/三种定理风格.pdf}
@@ -186,6 +191,7 @@
   \end{frame}
 
   \section{\texorpdfstring{\LaTeX{}}{LaTeX} 代码的规范性}
+  \subsection{不规范的 \texorpdfstring{\LaTeX{}}{LaTeX} 代码}
   \begin{frame}
     想知道什么叫规范之前，必须先知道什么叫\emph{不规范}，事实上不规范的代码在网络上是非常常见的，我这里给一段槽点无处不在的数学建模论文代码。
   \end{frame}
@@ -302,7 +308,7 @@
     这种将一个环境分为若干个部分，分别设定其样式的思想就叫做\emph{内容与样式分离}。
   \end{frame}
 
-  \section{什么是内容与样式分离？}
+  \subsection{内容与样式分离}
   \begin{frame}[fragile]{什么是内容与样式分离？}
     \emph{内容与样式分离}：一篇文档的\emph{实际内容}和\emph{逻辑结构}与这篇文档呈现给读者看到的\emph{样式}是相互独立的。\pause
 
@@ -337,7 +343,7 @@
       \item 手写样式。
     \end{itemize}
     \pause
-    \LaTeX{} 提供了预定义的章节命令，只需要修改它的样式即可，而不是\emph{手写样式}。我们来看看 \mintinline{latex}{\section} 的定义，继续加深对\emph{内容与样式分离}的理解。
+    \LaTeX{} 提供了预定义的章节命令，只需要修改它的样式即可（例如用 \pkg{ctex} 宏包提供的 \mintinline{latex}{\ctexset} 命令），而不是\emph{手写样式}。我们来看看 \mintinline{latex}{\section} 的定义，继续加深对\emph{内容与样式分离}的理解。
   \end{frame}
   \begin{frame}[fragile]{\texttt{\textbackslash section} 命令}
     \mintinline{latex}{\section} 在 \cls{article} 文档类里面的定义可以通过命令行执行
@@ -423,8 +429,7 @@ latexdef -c {book} -s \frontmatter
     \begin{minted}{latex}
 % book.cls, line 284:
 \newcommand\frontmatter{%
-    \cleardoublepage\@mainmatterfalse
-  \pagenumbering{roman}}
+    \cleardoublepage\@mainmatterfalse\pagenumbering{roman}}
     \end{minted}
     可以看出，\mintinline{latex}{\frontmatter} 大概做了两件事：
     \begin{itemize}
@@ -432,7 +437,10 @@ latexdef -c {book} -s \frontmatter
       \item 设置页码样式为 \mintinline{latex}{\roman}。
     \end{itemize}
     \pause
-    那么是否可以用 \mintinline{latex}{\pagenumbering{roman}} 代替 \mintinline{latex}{\frontmatter} 呢？\pause 答案是不能的，因为 \mintinline{latex}{\frontmatter} 命令主要的功能不是设置页码样式，而是代表\emph{开始前言}。
+    那么是否可以用 \mintinline{latex}{\pagenumbering{roman}} 代替 \mintinline{latex}{\frontmatter} 呢？
+    \pause
+
+    答案是否定的，因为 \mintinline{latex}{\frontmatter} 命令主要的功能不是设置页码样式，而是代表\emph{开始前言}。
   \end{frame}
   \begin{frame}[fragile]
     我们在写书的时候，需要区分的是\emph{前言}、\emph{正文}、\emph{附录}和\emph{后记}，而不是页码样式为 \mintinline{latex}{\roman} 和页码样式为 \mintinline{latex}{\arabic}，你完全可以将页码样式定义成你喜欢的样式，比如 \mintinline{latex}{\alph}，比如 \mintinline{latex}{\S\thepage}，页码样式只是为了区分不同的文档结构才设置的不同。
